@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FiLink } from "react-icons/fi";
 import LinkItem from "../../components/LinkItem";
 import Menu from "../../components/Menu";
@@ -9,8 +9,16 @@ function Home() {
   const [link, setLink] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({});
+  const [error, setError] = useState(false);
+  const inputRef = useRef();
 
   async function handleShortLink() {
+    if (!link) {
+      setError(true);
+      inputRef.current.focus();
+      return;
+    }
+
     try {
       const response = await api.post("/shorten", {
         long_url: link,
@@ -33,13 +41,17 @@ function Home() {
         <span>Cole seu link para encurtar 👇</span>
       </div>
       <div className="area-input">
-        <div>
+        <div className={`${error && "error"}`}>
           <FiLink size={24} color="#fff" />
           <input
             type="text"
             placeholder="Cole seu link aqui..."
             value={link}
-            onChange={(e) => setLink(e.target.value)}
+            onChange={(e) => {
+              setLink(e.target.value);
+              setError(false);
+            }}
+            ref={inputRef}
           />
         </div>
         <button onClick={handleShortLink}>Encurtar Link</button>
