@@ -10,10 +10,7 @@ export async function saveLink(key, newLink) {
 
   const hasLink = linksStored.some((link) => link.id === newLink.id);
 
-  if (hasLink) {
-    console.log("Já existe na lista!!!");
-    return;
-  }
+  if (hasLink) return;
 
   linksStored.push(newLink);
   await localStorage.setItem(key, JSON.stringify(linksStored));
