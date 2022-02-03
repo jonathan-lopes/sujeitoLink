@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { FiLink } from "react-icons/fi";
 import LinkItem from "../../components/LinkItem";
 import Menu from "../../components/Menu";
 import api from "../../services/api";
+import { saveLink } from "../../services/storeLinks";
 import "./styles.css";
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
   async function handleShortLink() {
     if (!link) {
       setError(true);
+      inputRef.current.placeholder = "Campo vazio...";
       inputRef.current.focus();
       return;
     }
@@ -26,6 +28,7 @@ function Home() {
 
       setData(response.data);
       setShowModal(true);
+      saveLink("@encurtaLink", response.data);
       setLink("");
     } catch (error) {
       alert("Ops parece que algo deu errado!");
@@ -50,6 +53,7 @@ function Home() {
             onChange={(e) => {
               setLink(e.target.value);
               setError(false);
+              inputRef.current.placeholder = "Cole seu link aqui...";
             }}
             ref={inputRef}
           />
