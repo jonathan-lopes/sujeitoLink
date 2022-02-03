@@ -1,4 +1,4 @@
-import { BsInstagram, BsYoutube } from "react-icons/bs";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
@@ -7,19 +7,19 @@ function Menu() {
     <div className="menu">
       <a
         className="social"
-        href="https:youtube.com/"
+        href="https://github.com/jonathan-lopes"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <BsYoutube size={24} color="#fff" />
+        <BsGithub size={24} color="#fff" />
       </a>
       <a
         className="social"
-        href="https:instagram.com/"
+        href="https://www.linkedin.com/in/jonathan-lopess/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <BsInstagram size={24} color="#fff" />
+        <BsLinkedin size={24} color="#fff" />
       </a>
 
       <Link className="menu-item" to="/links">
