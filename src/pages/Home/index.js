@@ -21,9 +21,14 @@ function Home() {
       return;
     }
 
+    let linkFormatted = "";
+    if (!link.includes("https://")) {
+      linkFormatted = `https://${link}`;
+    }
+
     try {
       const response = await api.post("/shorten", {
-        long_url: link,
+        long_url: linkFormatted || link,
       });
 
       setData(response.data);
